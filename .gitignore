@@ -1,1 +1,8 @@
 __pycache__
+/data-bin
+/build
+
+*.so
+
+PKG-INFO
+SOURCES.txt
