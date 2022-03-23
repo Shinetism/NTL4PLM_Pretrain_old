@@ -1,0 +1,30 @@
+# Knowledge-Inheritance
+
+Source code for paper: Knowledge Inheritance for Pre-trained Language Models. The code is based on implementation of [Fairseq](https://github.com/pytorch/fairseq).
+
+## Installation
+
+``` bash
+git clone https://github.com/pytorch/fairseq
+cd fairseq
+pip install --editable ./
+
+git clone https://github.com/NVIDIA/apex
+cd apex
+pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" \
+  --global-option="--deprecated_fused_adam" --global-option="--xentropy" \
+  --global-option="--fast_multihead_attn" ./
+```
+
+## Pre-training under KI
+
+``` bash
+cd examples/roberta
+bash train_base_to_base_plus.sh
+```
+
+For pre-training corpus collection, since BookCorpus is not publically available, you need to crawl it by yourself. We refer to [StackingBERT](https://github.com/gonglinyuan/StackingBERT) for data collection.
+
+## Downstream evaluation
+
+For downstream evaluation, (1) GLUE: we refer to the implementation of [Fairseq](https://github.com/pytorch/fairseq); (2) ACL-ARC & CHEMPROT: first use convert_fairseq_to_huggingface.py to convert the Fairseq format into Huggingface's [transformers](https://github.com/huggingface/transformers) format, then test the performance using the implementation of [Don't Stop Pre-training](https://github.com/allenai/dont-stop-pretraining).
